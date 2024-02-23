@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Route } from "next";
 import { ProductCoverImage } from "@/ui/atoms/ProductListItemCoverImage";
 import { ProductListItemDescription } from "@/ui/atoms/ProductListItemDescritpion";
