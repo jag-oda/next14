@@ -2,7 +2,7 @@ import { Route } from "next";
 import { ProductCoverImage } from "@/ui/atoms/ProductListItemCoverImage";
 import { ProductListItemDescription } from "@/ui/atoms/ProductListItemDescritpion";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
-import { ProductItemType } from "@/ui/types";
+
 
 export type ProductListItemProps = {
     product: ProductItemType,

@@ -10,9 +10,6 @@ export const ProductList = ({products} : { products: ProductItemType[]}) => {
             {products.map((product) => {
                 return (
                    <ProductListItem key={product.id} product={product} href={`/product/${product.id}` as Route} />
-                )
-            })}
-           
          </ul>
     );
 };

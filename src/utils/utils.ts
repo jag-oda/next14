@@ -6,6 +6,9 @@ export const formatPrice = (price : number) => {
 
 export const paginate = ( products: ProductItemType[], pageNumber: number, pageSize: number) => {
     const startIndex = (pageNumber - 1) * pageSize;
-    console.log('^^^^^ paginate')
     return products.slice(startIndex, startIndex + pageSize);
 };
+
+export const formatPrice = (price : number) => {
+    return  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
+}
