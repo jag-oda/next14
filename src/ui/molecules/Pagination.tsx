@@ -1,5 +1,6 @@
-import { ActiveLink } from '@/ui/atoms/ActiveLink';
+import { Route } from 'next';
 import clsx from 'clsx';
+import { ActiveLink } from '@/ui/atoms/ActiveLink';
 
 type PaginationPropsType = {
     items: number,
@@ -22,7 +23,7 @@ export const Pagination = (props: PaginationPropsType) => {
                          &&  (page === props.currentPage) && `underline` )}
                     >
                          <ActiveLink 
-								href={("/products/" + page)}
+								href={("/products/" + page) as Route}
 								aria-description={`PAGE ${page}`}
                                 exact={true}
 							>
