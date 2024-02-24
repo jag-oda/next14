@@ -8,4 +8,3 @@ export const paginate = ( products: ProductItemType[], pageNumber: number, pageS
     const startIndex = (pageNumber - 1) * pageSize;
     return products.slice(startIndex, startIndex + pageSize);
 };
-
