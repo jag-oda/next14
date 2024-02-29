@@ -3,18 +3,14 @@ import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { paginate } from "@/utils/utils";
 
-type ProductsPagePropsType = {
-  params: {
-    pageNumber: string
-  }
-}
-
-export default async function ProductsPage({ params }: ProductsPagePropsType) {
+export default async function ProductsPage({ params }: { params: { pageNumber: string } }) {
   const products =  await getProductsList();
+  //console.log('products', products)
   const currentPage = Number(params.pageNumber);
   const pageSize = 4;
  
   const paginatedProducts = paginate(products, currentPage, pageSize);
+  console.log('-----paginate products', paginatedProducts, params)
 
 	return (
 	<>

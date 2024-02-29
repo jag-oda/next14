@@ -9,25 +9,21 @@ import { SuggestedProductList } from "@/ui/organisms/SuggestedProductsList";
 
 export const generateStaticParams = async () => {
     const products = await getProductsList();
-    return products.slice(0,15).map((product)=> ({
-        productId: product.id
-    }))
+    return products.map((product) => ({ productId: product.id }));
 };
 
 export const generateMetadata = async({params}: {params: {productId: string}}): Promise<Metadata> => {
     const product = await getProductById(params.productId);
 
     return {
-        title: product?.name,
-        description: product?.description || product?.name,
-        openGraph: {
-            title: product?.name,
-            description: product?.description,
-            images: [{
-                url: product?.coverImage.src,
-            }]
-        }
-    }
+		title: product.name,
+		description: product.description,
+		openGraph: {
+			title: product.name,
+			description: product.description,
+			images: [product.images?[0].url],
+		},
+	};
 };
 
 export default async function SingleProductDetailsPage({
@@ -49,7 +45,7 @@ export default async function SingleProductDetailsPage({
         <div>
            <article className="max-w-xs">
             <h1>{product.name}</h1>
-            <ProductCoverImage coverImage={{src: product.coverImage.src, alt: product.coverImage.alt}}/>
+            <ProductCoverImage src={product.images[0].url} alt={product.name} />
             <ProductListItemDescription product={product}/>
         </article>
            <aside>
