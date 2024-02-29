@@ -1,7 +1,6 @@
 "use client";
 import { Route } from "next";
 import Link from "next/link";
-import clsx from 'clsx';
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
@@ -10,10 +9,11 @@ type ActiveLinkPropsType = {
     children: ReactNode,
     exact: boolean,
     "aria-description"?: string,
+    isNavLink?: boolean
 };
 
 export const ActiveLink = ( props: ActiveLinkPropsType) => {
-    const { href, children, exact } = props;
+    const { href, children, exact, isNavLink } = props;
     let pathname = usePathname();
     const isActive = pathname === href;
 
@@ -26,7 +26,7 @@ export const ActiveLink = ( props: ActiveLinkPropsType) => {
         isActive ? 
 			<Link 
                 href={href}
-                className={clsx(`text-blue-400 hover:text-blue-600 underline`)}
+                className={ `${isNavLink ? "hover:bg-blue-600 hover:text-white" : ""} lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center underline`}
                 aria-current={true}
                 aria-description={props["aria-description"]}
             > 
@@ -35,7 +35,7 @@ export const ActiveLink = ( props: ActiveLinkPropsType) => {
             : 
             <Link 
                 href={href}
-                className={clsx(`text-blue-400 hover:text-blue-600`)}
+                className={`${isNavLink ? "hover:bg-blue-600 hover:text-white" : ""} lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center`}
                 aria-description={props["aria-description"]}
             > 
                 {children}
