@@ -1,7 +1,7 @@
-//import { notFound } from "next/navigation";
-//import { executeGraphql } from "@/api/graphglApi";
-//import { ProductList } from "@/ui/organisms/ProductList";
-//import { getProductsByCategorySlug } from "@/api/products";
+import { notFound } from "next/navigation";
+import { executeGraphql } from "@/api/graphglApi";
+import { ProductList } from "@/ui/organisms/ProductList";
+import { getProductsByCategorySlug } from "@/api/products";
 
 export async function generateStaticParams({ params }: { params: { category: string } }) {
 	// pobierz produkty dla danej kategorii
@@ -10,13 +10,16 @@ export async function generateStaticParams({ params }: { params: { category: str
 }
 
 export default async function CategoryProductPage({params}: {params: {category: string, pageNumber: number}}){
-  /* const products = []// await getProductsByCategorySlug(params.category)
+    const products = await getProductsByCategorySlug(params.category)
 
     if(!products){
         notFound();
-    } */
+    } 
 
     return (
-      <><h1> Producty z kategoriii {params.category} ze strony {params.pageNumber}</h1></>
+      <div>
+        <h1 className="uppercase mb-6 text-5xl font-bold mb-10">{params.category}</h1>
+        <ProductList products={products} />
+      </div>
     )
 }

@@ -1,7 +1,6 @@
 import { TypedDocumentString } from "@/gql/graphql";
 
 export const executeGraphql = async<TResult, TVariables> (query: TypedDocumentString<TResult, TVariables>, variables: TVariables): Promise<TResult> => {
-   // console.log('execute graphql')
     if(!process.env.GRAPHQL_URL) {
         throw TypeError('Graphql URL is not defined')
     };
