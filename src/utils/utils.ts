@@ -4,8 +4,6 @@ export const formatPrice = (price : number) => {
 }
 
 export const paginate = ( products: ProductListItemFragment[], pageNumber: number, pageSize: number) => {
-    console.log('******** paginate', products)
-    console.log('******** paginate', pageNumber)
     const startIndex = (pageNumber - 1) * pageSize;
     return products.slice(startIndex, startIndex + pageSize);
 };

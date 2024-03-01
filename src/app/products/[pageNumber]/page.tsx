@@ -10,7 +10,6 @@ export default async function ProductsPage({ params }: { params: { pageNumber: s
   const pageSize = 4;
  
   const paginatedProducts = paginate(products, currentPage, pageSize);
-  console.log('-----paginate products', paginatedProducts, params)
 
 	return (
 	<>

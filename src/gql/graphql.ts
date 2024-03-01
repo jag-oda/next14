@@ -272,6 +272,13 @@ export type SortDirection =
   | 'ASC'
   | 'DESC';
 
+export type ProductGetByIdQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']['input']>;
+}>;
+
+
+export type ProductGetByIdQuery = { product?: { name: string, price: number, description: string, id: string, categories: Array<{ name: string }>, images: Array<{ url: string, width: number, height: number, alt: string }> } | null };
+
 export type ProductListItemFragment = { name: string, price: number, description: string, id: string, categories: Array<{ name: string }>, images: Array<{ url: string, width: number, height: number, alt: string }> };
 
 export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
@@ -310,6 +317,27 @@ export const ProductListItemFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductListItem"}) as unknown as TypedDocumentString<ProductListItemFragment, unknown>;
+export const ProductGetByIdDocument = new TypedDocumentString(`
+    query ProductGetById($id: ID) {
+  product(id: $id) {
+    ...ProductListItem
+  }
+}
+    fragment ProductListItem on Product {
+  name
+  price
+  description
+  id
+  categories {
+    name
+  }
+  images {
+    url
+    width
+    height
+    alt
+  }
+}`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList {
   products(take: 10) {

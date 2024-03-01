@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import { getProductById, getProductsList } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductListItemCoverImage";
-import { ProductListItemDescription } from "@/ui/atoms/ProductListItemDescritpion";
+import { ProductDetalistDescription } from "@/ui/atoms/ProductDetalistDescription";
 import { SuggestedProductList } from "@/ui/organisms/SuggestedProductsList";
 
 
@@ -14,6 +14,7 @@ export const generateStaticParams = async () => {
 
 export const generateMetadata = async({params}: {params: {productId: string}}): Promise<Metadata> => {
     const product = await getProductById(params.productId);
+    if(!product) throw new Error("Product doesn't exist.");
 
     return {
 		title: product.name,
@@ -21,10 +22,15 @@ export const generateMetadata = async({params}: {params: {productId: string}}): 
 		openGraph: {
 			title: product.name,
 			description: product.description,
-			images: [product.images?[0].url],
+			images: [
+				{
+					url: product.images[0]?.url || "",
+					alt: product.name,
+				},
+			],
 		},
 	};
-};
+}
 
 export default async function SingleProductDetailsPage({
         params, 
@@ -36,19 +42,18 @@ export default async function SingleProductDetailsPage({
     ) {
     
     const product = await getProductById(params.productId)
-    if (product === null) {
+    if (!product) {
 		return notFound();
 	}
 
-
     return (
-        <div>
-           <article className="max-w-xs">
-            <h1>{product.name}</h1>
-            <ProductCoverImage src={product.images[0].url} alt={product.name} />
-            <ProductListItemDescription product={product}/>
-        </article>
-           <aside>
+        <div className="text-left text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200">
+                <h1 className="mb-6 text-5xl font-bold">{product.name}</h1>
+                <article  className="mx-full w-full flex space-x-8 px-5 mt-10">
+                    {product.images && <ProductCoverImage src={product.images[0].url} alt={product.name} /> }
+                    <ProductDetalistDescription product={product} />
+              </article>
+              <aside className="mt-10">
                 <Suspense>
                     <SuggestedProductList/>
                 </Suspense>

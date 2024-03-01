@@ -1,5 +1,5 @@
 import { executeGraphql } from "./graphglApi";
-import { ProductsGetListDocument, ProductListItemFragment } from "@/gql/graphql";
+import { ProductsGetListDocument, ProductListItemFragment, ProductGetByIdDocument } from "@/gql/graphql";
 
 /*type ProductType = {
     id: string
@@ -54,7 +54,8 @@ export const getProductsList = async () => {
 }; */
 
 export const getProductById =  async (id: ProductListItemFragment["id"]) => {
-    return id;
+    const graphqlResponse = await executeGraphql(ProductGetByIdDocument, {id: id})
+    return graphqlResponse?.product;
    //const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${id}`);
    //const product = (await res.json()) as ProductType;
   // return productResponseItemTypeToProductItemType(product);

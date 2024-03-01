@@ -12,7 +12,6 @@ type ProductListItemProps = {
 
 
 export const ProductListItem = ({product, href} :  ProductListItemProps) => {
-    console.log('^^^^^', product.images[0]?.url)
     return (
     <li className="bg-white hover:scale-110 hover:border-gray-400 border-transparent border-2 rounded-md">
         <ActiveLink href={href} exact={true}>
