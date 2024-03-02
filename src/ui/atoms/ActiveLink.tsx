@@ -14,13 +14,8 @@ type ActiveLinkPropsType = {
 
 export const ActiveLink = ( props: ActiveLinkPropsType) => {
     const { href, children, exact, isNavLink } = props;
-    let pathname = usePathname();
-    const isActive = pathname === href;
-
-    if (!exact) {
-		const link = pathname.split("/").splice(2).join("/");
-		pathname = link;
-	}
+    const pathname = usePathname();
+    const isActive = exact ? pathname === href : pathname.startsWith(href)
 
     return (
         isActive ? 
