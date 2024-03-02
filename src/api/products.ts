@@ -1,5 +1,13 @@
 import { executeGraphql } from "./graphglApi";
-import { ProductsGetListDocument, ProductListItemFragment, ProductGetByIdDocument, ProductsGetByCategorySlugDocument, CategoriesGetListDocument } from "@/gql/graphql";
+import { 
+    ProductsGetListDocument, 
+    ProductListItemFragment, 
+    ProductGetByIdDocument, 
+    ProductsGetByCategorySlugDocument, 
+    CategoriesGetListDocument, 
+    CollectionsGetListDocument ,
+    CollectionGetSlugDocument
+} from "@/gql/graphql";
 
 /*type ProductType = {
     id: string
@@ -66,11 +74,20 @@ export const getCategoryList = async() => {
     return graphqlResponse.categories.data;
 };
 
-export const getProductsByCategorySlug =async (slug: string) => {
+export const getProductsByCategorySlug = async (slug: string) => {
     const graphqlResponse = await executeGraphql(ProductsGetByCategorySlugDocument, {slug: slug});
     return graphqlResponse.category?.products;
 }
 
+export const getCollectionsList = async() => {
+    const graphqlResponse = await executeGraphql(CollectionsGetListDocument, {})
+    return graphqlResponse.collections.data;
+};
+
+export const getCollectionBySlug = async (slug: string) => {
+    const graphqlResponse = await executeGraphql(CollectionGetSlugDocument, {slug: slug})
+    return graphqlResponse.collection;  
+}
 /*const productResponseItemTypeToProductItemType = (product: ProductType) : ProductItemType => {
 
     return {

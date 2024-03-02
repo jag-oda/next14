@@ -10,10 +10,16 @@ const nextConfig = {
 	},
     redirects: async () => {
         return [{
-            source: "/products/t-shirts",
-            destination: "//products/t-shirts/1",
-            permanent: false,
-        }]
+            source: "/products",
+            destination: "/products/1",
+            permanent: true,
+        },
+        {
+            source: "/categories",
+            destination: "/categories/t-shirts/1",
+            permanent: true,
+        },
+    ]
     }
 }
    
