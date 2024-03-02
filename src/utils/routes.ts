@@ -4,8 +4,8 @@ export const routes = [
 		label: "Home",
 	},
 	{
-		href: "/products/1",
-		label: "All products",
+		href: "/products",
+		label: "All",
 	},
     {
 		href: "/categories",
