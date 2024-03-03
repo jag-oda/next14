@@ -7,7 +7,8 @@ import {
     CategoriesGetListDocument, 
     CollectionsGetListDocument ,
     CollectionGetSlugDocument,
-    SuggestedProductsGetListDocument
+    SuggestedProductsGetListDocument,
+    ProductsGetListBySearchDocument
 } from "@/gql/graphql";
 
 /*type ProductType = {
@@ -93,6 +94,17 @@ export const getCollectionBySlug = async (slug: string) => {
 export const getSuggestedProductsList = async () => {
     const graphqlResponse = await executeGraphql(SuggestedProductsGetListDocument, {});
     return graphqlResponse.products.data.sort((a, b) => b?.rating - a?.rating).slice(0,4);
+};
+
+export const getProductsListBySearch = async (search: string) => {
+	const graphqlResponse = await executeGraphql(ProductsGetListBySearchDocument, {
+		search,
+	});
+	if (!graphqlResponse) {
+		throw new Error("Failed to fetch products");
+	}
+
+	return graphqlResponse.products?.data;
 };
 /*const productResponseItemTypeToProductItemType = (product: ProductType) : ProductItemType => {
 
