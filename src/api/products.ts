@@ -8,7 +8,7 @@ import {
     CollectionsGetListDocument ,
     CollectionGetSlugDocument,
     SuggestedProductsGetListDocument,
-    ProductsGetListBySearchDocument
+    ProductsGetListBySearchDocument,
 } from "@/gql/graphql";
 
 /*type ProductType = {
@@ -26,10 +26,9 @@ import {
 }; */
 
 
-export const getProductsList = async () => {
-    const graphqlResponse = await executeGraphql(ProductsGetListDocument, {})
-    //console.log('graphql response', graphqlResponse.products.data.length)
-    return graphqlResponse.products.data;
+export const getProductsList = async (take: number, skip: number) => {
+    const graphqlResponse = await executeGraphql(ProductsGetListDocument, {take, skip});
+    return graphqlResponse.products;
    
  /*   return graphqlResponse?.products?.map((product) => {
         return {
@@ -106,6 +105,7 @@ export const getProductsListBySearch = async (search: string) => {
 
 	return graphqlResponse.products?.data;
 };
+
 /*const productResponseItemTypeToProductItemType = (product: ProductType) : ProductItemType => {
 
     return {

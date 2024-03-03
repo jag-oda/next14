@@ -3,5 +3,6 @@ query ProductsGetListBySearch($search: String!) {
 		data {
             ...ProductListItem
         }
+        ...DataForPagination
 	}
 }

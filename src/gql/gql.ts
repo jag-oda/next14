@@ -18,11 +18,12 @@ const documents = {
     "query CollectionGetSlug($slug: String!) {\n  collection(slug: $slug) {\n    ...CollectionListItem\n    products {\n      ...ProductListItem\n    }\n  }\n}": types.CollectionGetSlugDocument,
     "fragment CollectionListItem on Collection {\n  name\n  slug\n  description\n  id\n  products {\n    images {\n      url\n    }\n  }\n}": types.CollectionListItemFragmentDoc,
     "query CollectionsGetList {\n  collections(take: 4) {\n    data {\n      ...CollectionListItem\n    }\n  }\n}": types.CollectionsGetListDocument,
+    "fragment DataForPagination on ProductList {\n  meta {\n    count\n    total\n  }\n}": types.DataForPaginationFragmentDoc,
     "query ProductGetById($id: ID) {\n  product(id: $id) {\n    ...ProductListItem\n  }\n}": types.ProductGetByIdDocument,
     "fragment ProductListItem on Product {\n  name\n  price\n  description\n  id\n  categories {\n    name\n  }\n  images {\n    url\n    width\n    height\n    alt\n  }\n}": types.ProductListItemFragmentDoc,
     "query ProductsGetByCategorySlug($slug: String!) {\n  category(slug: $slug) {\n    products {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
-    "query ProductsGetList {\n  products(take: 50) {\n    data {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetListDocument,
-    "query ProductsGetListBySearch($search: String!) {\n  products(search: $search) {\n    data {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetListBySearchDocument,
+    "query ProductsGetList($take: Int!, $skip: Int!) {\n  products(take: $take, skip: $skip) {\n    data {\n      ...ProductListItem\n    }\n    ...DataForPagination\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsGetListBySearch($search: String!) {\n  products(search: $search) {\n    data {\n      ...ProductListItem\n    }\n    ...DataForPagination\n  }\n}": types.ProductsGetListBySearchDocument,
     "query SuggestedProductsGetList {\n  products {\n    data {\n      rating\n      ...ProductListItem\n    }\n  }\n}": types.SuggestedProductsGetListDocument,
 };
 
@@ -45,6 +46,10 @@ export function graphql(source: "query CollectionsGetList {\n  collections(take:
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "fragment DataForPagination on ProductList {\n  meta {\n    count\n    total\n  }\n}"): typeof import('./graphql').DataForPaginationFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "query ProductGetById($id: ID) {\n  product(id: $id) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductGetByIdDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -57,11 +62,11 @@ export function graphql(source: "query ProductsGetByCategorySlug($slug: String!)
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList {\n  products(take: 50) {\n    data {\n      ...ProductListItem\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductsGetList($take: Int!, $skip: Int!) {\n  products(take: $take, skip: $skip) {\n    data {\n      ...ProductListItem\n    }\n    ...DataForPagination\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetListBySearch($search: String!) {\n  products(search: $search) {\n    data {\n      ...ProductListItem\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListBySearchDocument;
+export function graphql(source: "query ProductsGetListBySearch($search: String!) {\n  products(search: $search) {\n    data {\n      ...ProductListItem\n    }\n    ...DataForPagination\n  }\n}"): typeof import('./graphql').ProductsGetListBySearchDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

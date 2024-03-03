@@ -1,16 +1,10 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { Suspense } from "react";
-import { getProductById, getProductsList } from "@/api/products";
+import { getProductById } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductListItemCoverImage";
 import { ProductDetalistDescription } from "@/ui/atoms/ProductDetalistDescription";
 import { SuggestedProductList } from "@/ui/organisms/SuggestedProductsList";
-
-
-export const generateStaticParams = async () => {
-    const products = await getProductsList();
-    return products.map((product) => ({ productId: product.id }));
-};
 
 export const generateMetadata = async({params}: {params: {productId: string}}): Promise<Metadata> => {
     const product = await getProductById(params.productId);
