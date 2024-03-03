@@ -53,8 +53,8 @@ export default async function SingleProductDetailsPage({
                     {product.images && <ProductCoverImage src={product.images[0].url} alt={product.name} /> }
                     <ProductDetalistDescription product={product} />
               </article>
-              <aside className="mt-10">
-                <Suspense>
+              <aside className="mt-10" data-testid="related-products">
+                <Suspense key="suggestedProductSuspense">
                     <SuggestedProductList/>
                 </Suspense>
             </aside>

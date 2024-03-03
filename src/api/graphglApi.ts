@@ -4,6 +4,7 @@ export const executeGraphql = async<TResult, TVariables> (query: TypedDocumentSt
     if(!process.env.GRAPHQL_URL) {
         throw TypeError('Graphql URL is not defined')
     };
+
     const res = await fetch(process.env.GRAPHQL_URL as string, {
         method: "POST",
         body: JSON.stringify({

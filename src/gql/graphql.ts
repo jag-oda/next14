@@ -313,6 +313,11 @@ export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ProductsGetListQuery = { products: { data: Array<{ name: string, price: number, description: string, id: string, categories: Array<{ name: string }>, images: Array<{ url: string, width: number, height: number, alt: string }> }> } };
 
+export type SuggestedProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SuggestedProductsGetListQuery = { products: { data: Array<{ rating?: number | null, name: string, price: number, description: string, id: string, categories: Array<{ name: string }>, images: Array<{ url: string, width: number, height: number, alt: string }> }> } };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -467,7 +472,7 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
 }`) as unknown as TypedDocumentString<ProductsGetByCategorySlugQuery, ProductsGetByCategorySlugQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList {
-  products(take: 10) {
+  products(take: 50) {
     data {
       ...ProductListItem
     }
@@ -488,3 +493,27 @@ export const ProductsGetListDocument = new TypedDocumentString(`
     alt
   }
 }`) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
+export const SuggestedProductsGetListDocument = new TypedDocumentString(`
+    query SuggestedProductsGetList {
+  products {
+    data {
+      rating
+      ...ProductListItem
+    }
+  }
+}
+    fragment ProductListItem on Product {
+  name
+  price
+  description
+  id
+  categories {
+    name
+  }
+  images {
+    url
+    width
+    height
+    alt
+  }
+}`) as unknown as TypedDocumentString<SuggestedProductsGetListQuery, SuggestedProductsGetListQueryVariables>;

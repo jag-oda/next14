@@ -7,7 +7,7 @@ export default async function HomePage(){
 
     return (
         <section>
-            <Suspense>
+            <Suspense key="collectionsListSuspense">
                 <CollectionsList collections={collections} />
             </Suspense>
         </section>

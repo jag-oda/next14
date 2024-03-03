@@ -20,7 +20,7 @@ export default async function CollectionPage({ params }: CollectionPageProps){
         <div>
             <CollectionDetailsDescription name={collection.name} description={collection.description}/>
             <aside className="mt-10">
-                <Suspense>
+                <Suspense key="productsListSuspense">
                     <ProductList products={collection.products} />
                 </Suspense>
             </aside>
