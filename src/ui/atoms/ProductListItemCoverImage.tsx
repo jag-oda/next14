@@ -1,18 +1,22 @@
-type ProductCoverImageProps = {
+import NextImage from "next/image";
+
+/*type ProductCoverImageProps = {
     coverImage: {
         src: string,
         alt: string
     }
-};
+}; */
 
-export const ProductCoverImage = ({coverImage: {src, alt}}: ProductCoverImageProps) => {
+export const ProductCoverImage = ({ src, alt }: { src: string; alt: string }) => {
     return (
-        <div className="aspect-square overflow-hidden rounded-md border bg-slate-50 hover:bg-slate-100">
-            <img 
-                src={src}
-                alt={alt} 
-                className="w-64 h-64 object-cover rounded-t-xl"
-            />
-        </div>
+        <div className="aspect-square overflow-hidden rounded-md bg-gray-100">
+        <NextImage
+            width={320}
+            height={320}
+            src={src}
+            alt={alt}
+            className="h-full w-full object-cover object-center p-4 duration-150 hover:scale-110 md:object-scale-down"
+        />
+    </div>
     )
 };
