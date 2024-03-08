@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { executeGraphql } from "@/api/graphglApi";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCategorySlug } from "@/api/products";
 

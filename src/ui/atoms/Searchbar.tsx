@@ -2,9 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Search } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Route } from 'next';
+import { useEffect, useState } from 'react';
 import useDebounce from '@/utils/debounce';
 
 export const Searchbar = () => {

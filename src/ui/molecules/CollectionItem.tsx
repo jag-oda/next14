@@ -1,6 +1,5 @@
 import { Route } from "next";
 import { CollectionListItemFragment } from "@/gql/graphql";
-import { ActiveLink } from "../atoms/ActiveLink";
 import Link from "next/link";
 
 type CollectionItemProps = {
