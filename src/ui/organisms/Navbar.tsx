@@ -1,6 +1,7 @@
+'use server';
 import { NavbarLinksContent } from "../molecules/NavbarLinksContent";
 
-export const Navbar = () => {
+export async function Navbar(){
 	return (
 			<nav>
 				<NavbarLinksContent />

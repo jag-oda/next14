@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { ProductList } from "@/ui/organisms/ProductList";
-import { getProductsByCategorySlug } from "@/api/products";
+import { getProductsByCategorySlug } from "@/api/category";
 
 export default async function CategoryProductPage({params}: {params: {category: string, pageNumber: number}}){
     const products = await getProductsByCategorySlug(params.category)

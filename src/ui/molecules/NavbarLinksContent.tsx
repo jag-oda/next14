@@ -1,7 +1,7 @@
 import type { Route } from "next";
 import { ActiveLink } from "../atoms/ActiveLink";
 import { routes } from "@/utils/routes";
-import { getCategoryList } from "@/api/products";
+import { getCategoryList } from "@/api/category";
 
 export const NavbarLinksContent = async() => {
 	const categoriesList = await getCategoryList();

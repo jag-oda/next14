@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getCollectionBySlug } from "@/api/products"
+import { getCollectionBySlug } from "@/api/collections"
 import { CollectionDetailsDescription } from "@/ui/atoms/CollectionDetalistDescription"
 import { Suspense } from "react"
 import { ProductList } from "@/ui/organisms/ProductList"

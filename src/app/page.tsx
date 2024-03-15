@@ -1,4 +1,4 @@
-import { getCollectionsList } from "@/api/products";
+import { getCollectionsList } from "@/api/collections";
 import { CollectionsList } from "@/ui/organisms/CollectionsList";
 import { Suspense } from "react";
 

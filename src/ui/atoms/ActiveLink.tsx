@@ -11,7 +11,7 @@ type ActiveLinkPropsType = {
     children: ReactNode,
     exact: boolean,
     "aria-description"?: string,
-    isNavLink?: boolean
+    isNavLink?: boolean,
     isPaginationLink?: boolean
 };
 
