@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
 	title: "NEXT shop",
+	metadataBase: new URL("https://nextjs14masters.com"),
 };
 
 export default function RootLayout({
