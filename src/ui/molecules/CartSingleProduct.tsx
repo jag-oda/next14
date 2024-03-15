@@ -2,6 +2,7 @@ import Image from "next/image";
 import { CartFragment } from "@/gql/graphql";
 import { formatPrice } from "@/utils/utils";
 import { QuantitySection } from "./QuantitySection";
+import { RemoveButton } from "@/app/cart/RemoveButton";
 
 type CartSingleProductProps= {
 	product: CartFragment["items"][number]["product"];
@@ -26,8 +27,8 @@ export const CartSingleProduct = ({ cartId, quantity, product }: CartSingleProdu
 					<p className="text-lg font-bold">{formatPrice((product.price / 100) * quantity)}</p>
 		</div>
         <QuantitySection quantity={quantity} cartId={cartId} productId={product.id}/>
-        <div className="flex-start">
-
+        <div className="flex-start mt-6">
+            <RemoveButton cartId={cartId} productId={product.id} />
 		</div>
         </div>
 }

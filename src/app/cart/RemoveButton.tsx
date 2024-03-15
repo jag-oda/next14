@@ -17,7 +17,7 @@ export function RemoveButton({ cartId, productId }: { cartId: string, productId:
 					router.refresh();
 				})
 			}
-			className="text-sm font-medium text-indigo-600 hover:text-indigo-500 disabled:cursor-wait disabled:text-slate-400"
+			className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded w-full"
 		>
 			Remove
 		</button>
