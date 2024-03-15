@@ -63,7 +63,7 @@ export default async function SingleProductDetailsPage({
         <div className="text-left text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200">
                 <h1 className="mb-6 text-5xl font-bold">{product.name}</h1>
                 <article  className="mx-full w-full flex space-x-8 px-5 mt-10">
-                    {product.images && <ProductCoverImage src={product.images[0].url} alt={product.name} /> }
+                    {product.images && <ProductCoverImage src={product.images[0]?.url || ""} alt={product.name} /> }
                     <div>
                     <ProductDetalistDescription product={product} />
                     <form action={addToCartAction}>
