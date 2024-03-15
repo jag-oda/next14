@@ -49,7 +49,7 @@ export default async function SingleProductDetailsPage({
 
     const productReviews = await getReviewsByProductId(product.id);
 
-    async function addToCartAction(formData: FormData){
+    async function addToCartAction(){
         "use server";
        const cart = await getOrCreateCart();
        const isExistingProduct = cart.items.find((item) => item.product.id === params.productId);

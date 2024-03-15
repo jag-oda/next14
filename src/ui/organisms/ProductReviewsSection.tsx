@@ -16,10 +16,6 @@ type ProductReviewsSectionProps = {
 export const ProductReviewsSection = ({ product, reviews }: ProductReviewsSectionProps) => {
 	const [optimisticReviews, setOptimisticReviews] = useOptimistic(reviews);
 
-	const clearFormData = (formData: FormData) => {
-
-	}; 
-
     return (
 		<div className="max-w-2xl lg:grid lg:max-w-full lg:grid-cols-12 lg:gap-x-8 lg:py-16">
 				<div className="w-max">
@@ -41,7 +37,6 @@ export const ProductReviewsSection = ({ product, reviews }: ProductReviewsSectio
 									createdAt: new Date().toISOString(),
 								},
 							]);
-							 clearFormData(formData);
 						}}
 						/>
 				</div>

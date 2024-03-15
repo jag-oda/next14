@@ -12,7 +12,6 @@ export const executeGraphql = async <TResult, TVariables>({
 	query,
 	variables,
 	cache,
-	headers,
 	next,
 }: ExecuteGraphqlArgs<TResult, TVariables>): Promise<TResult> => {
     

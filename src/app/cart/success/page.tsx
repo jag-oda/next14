@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import Stripe from "stripe";
 
 type CartSuccessPageProps = {
 	searchParams: {

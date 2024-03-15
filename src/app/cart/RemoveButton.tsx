@@ -4,16 +4,16 @@ import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { removeItem } from "./actions";
 
-export function RemoveButton({ productId }: { productId: string }) {
+export function RemoveButton({ cartId, productId }: { cartId: string, productId: string }) {
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
 
 	return (
-		<button
+		<button 
 			disabled={isPending}
 			onClick={() =>
 				startTransition(async () => {
-					await removeItem(productId);
+					await removeItem(cartId,productId);
 					router.refresh();
 				})
 			}
