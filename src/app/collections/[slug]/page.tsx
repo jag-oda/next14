@@ -10,6 +10,18 @@ type CollectionPageProps = {
     }
 }
 
+export const generateMetadata = async ({ params }: CollectionPageProps) => {
+	const collection = await getCollectionBySlug(params.slug);
+	if (!collection) return { title: "Collection" };
+	return {
+		title: collection.name,
+		description: collection.description,
+		openGraph: {
+			title: collection.name,
+		},
+	};
+};
+
 export default async function CollectionPage({ params }: CollectionPageProps){
     const collection = await getCollectionBySlug(params.slug)
 

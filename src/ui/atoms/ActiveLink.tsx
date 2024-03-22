@@ -25,11 +25,11 @@ export const ActiveLink = ( props: ActiveLinkPropsType) => {
                 href={href}
                 className={clsx(
                     `lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center `,
-                    isActive && `underline`,
+                    isActive && `border-b-2 border-b-blue-600`,
                     isNavLink && `hover:text-slate-500  text-white block`,
                     isPaginationLink && `text-gray-500 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`
                 )}
-                aria-current={true}
+                aria-current={isActive ? "page" : undefined}
                 aria-description={props["aria-description"]}
             > 
                 {children}

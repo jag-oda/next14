@@ -12,6 +12,7 @@ import { revalidateTag } from "next/cache";
 import { ProductReviewsSection } from "@/ui/organisms/ProductReviewsSection";
 import { changeItemQuantity } from "@/app/cart/actions";
 
+
 export const generateMetadata = async({params}: {params: {productId: string}}): Promise<Metadata> => {
     const product = await getProductById(params.productId);
 
@@ -72,7 +73,6 @@ export default async function SingleProductDetailsPage({
                     </form>
                     </div>
               </article>
-
               <aside className="mt-10" data-testid="related-products">
                 <Suspense key="suggestedProductSuspense">
                     <SuggestedProductList/>

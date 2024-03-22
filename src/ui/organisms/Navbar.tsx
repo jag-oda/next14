@@ -2,7 +2,7 @@
 import { NavbarLinksContent } from "../molecules/NavbarLinksContent";
 
 export async function Navbar(){
-	return (
+		return (
 			<nav>
 				<NavbarLinksContent />
 			</nav>		
