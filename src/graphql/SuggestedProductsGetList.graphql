@@ -1,0 +1,8 @@
+query SuggestedProductsGetList {
+	products {
+		data {
+			rating
+			...ProductListItem
+		}
+	}
+}

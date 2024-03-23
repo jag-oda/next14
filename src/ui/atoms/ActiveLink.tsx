@@ -1,44 +1,38 @@
 "use client";
 import { Route } from "next";
 import Link from "next/link";
-import clsx from 'clsx';
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
+import clsx from "clsx";
+
 
 type ActiveLinkPropsType = {
     href: Route,
     children: ReactNode,
     exact: boolean,
     "aria-description"?: string,
+    isNavLink?: boolean,
+    isPaginationLink?: boolean
 };
 
 export const ActiveLink = ( props: ActiveLinkPropsType) => {
-    const { href, children, exact } = props;
-    let pathname = usePathname();
-    const isActive = pathname === href;
-
-    if (!exact) {
-		const link = pathname.split("/").splice(2).join("/");
-		pathname = link;
-	}
+    const { href, children, exact, isNavLink, isPaginationLink } = props;
+    const pathname = usePathname();
+    const isActive = exact ? pathname === href : pathname.startsWith(href)
 
     return (
-        isActive ? 
 			<Link 
                 href={href}
-                className={clsx(`text-blue-400 hover:text-blue-600 underline`)}
-                aria-current={true}
+                className={clsx(
+                    `lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center `,
+                    isActive && `border-b-2 border-b-blue-600`,
+                    isNavLink && `hover:text-slate-500  text-white block`,
+                    isPaginationLink && `text-gray-500 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`
+                )}
+                aria-current={isActive ? "page" : undefined}
                 aria-description={props["aria-description"]}
             > 
                 {children}
             </Link>
-            : 
-            <Link 
-                href={href}
-                className={clsx(`text-blue-400 hover:text-blue-600`)}
-                aria-description={props["aria-description"]}
-            > 
-                {children}
-            </Link>
-    );
+    )
 };

@@ -1,43 +1,42 @@
-import { ProductItemType } from "@/ui/types";
+import { executeGraphql } from "./graphglApi";
+import { 
+    ProductsGetListDocument, 
+    SuggestedProductsGetListDocument,
+    ProductsGetListBySearchDocument,
+	SortDirection,
+	ProductSortBy,
+} from "@/gql/graphql";
 
-type ProductType = {
-    id: string
-    title: string
-    price: number
-    description: string
-    category: string
-    rating:  {
-        rate: number
-        count: number
-    },
-    image: string
-    longDescription: string
+
+export const getProductsList = async (take: number, skip: number, order?: SortDirection, orderBy?: ProductSortBy) => {
+    const graphqlResponse = await executeGraphql({
+		query: ProductsGetListDocument,
+		variables: {
+			take,
+			skip,
+			order,
+			orderBy,
+		},
+		next: {
+			revalidate: 30,
+		},
+	});
+    return graphqlResponse.products;
+}
+   
+export const getSuggestedProductsList = async () => {
+    const graphqlResponse = await executeGraphql({query: SuggestedProductsGetListDocument, variables: {}});
+    return graphqlResponse.products.data.slice(-5);
 };
 
-export const getProductsList = async () => {
-    const res = await fetch("https://naszsklep-api.vercel.app/api/products?take=20");
-	const productsResponse = (await res.json()) as ProductType[];
-    const products = productsResponse.map((product) : ProductItemType => productResponseItemTypeToProductItemType(product));
+export const getProductsListBySearch = async (search: string) => {
+	const graphqlResponse = await executeGraphql({query: ProductsGetListBySearchDocument, variables: {
+		search,
+	}});
+	if (!graphqlResponse) {
+		throw new Error("Failed to fetch products");
+	}
 
-  return products;
-}
-
-export const getProductById =  async (id: ProductType["id"]) => {
-   const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${id}`);
-   const product = (await res.json()) as ProductType;
-   return productResponseItemTypeToProductItemType(product);
+	return graphqlResponse.products?.data;
 };
 
-const productResponseItemTypeToProductItemType = (product: ProductType) : ProductItemType => {
-    return {
-        id: product.id,
-        name: product.title,
-        price: product.price,
-        description: product.description,
-        category: product.category,
-        coverImage: { 
-            src: product.image,
-            alt: product.title,
-        }
-    }
-}

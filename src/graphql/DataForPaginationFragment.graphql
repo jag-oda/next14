@@ -1,0 +1,6 @@
+fragment DataForPagination on ProductList {
+    meta {
+      count
+      total
+    }
+}
