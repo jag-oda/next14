@@ -3,15 +3,19 @@ import {
     ProductsGetListDocument, 
     SuggestedProductsGetListDocument,
     ProductsGetListBySearchDocument,
+	SortDirection,
+	ProductSortBy,
 } from "@/gql/graphql";
 
 
-export const getProductsList = async (take: number, skip: number) => {
+export const getProductsList = async (take: number, skip: number, order?: SortDirection, orderBy?: ProductSortBy) => {
     const graphqlResponse = await executeGraphql({
 		query: ProductsGetListDocument,
 		variables: {
 			take,
-			skip
+			skip,
+			order,
+			orderBy,
 		},
 		next: {
 			revalidate: 30,
@@ -22,7 +26,7 @@ export const getProductsList = async (take: number, skip: number) => {
    
 export const getSuggestedProductsList = async () => {
     const graphqlResponse = await executeGraphql({query: SuggestedProductsGetListDocument, variables: {}});
-    return graphqlResponse.products.data.slice(-4);
+    return graphqlResponse.products.data.slice(-5);
 };
 
 export const getProductsListBySearch = async (search: string) => {

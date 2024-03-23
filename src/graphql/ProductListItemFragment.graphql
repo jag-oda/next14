@@ -3,6 +3,7 @@ fragment ProductListItem on Product {
 	price
 	description
 	id
+	rating
 	categories {
 		name
 	}
